@@ -1,6 +1,6 @@
 # S3 DataSync
 
-> 차량 데이터가 저장된 S3 (socar-fms-iot-data) 에서 개발 환경에 구축된 S3 (socar-fms-dev-iot-data) 로의 DataSync 작업 필요
+> 차량 데이터가 저장된 S3 (source-s3-bucket) 에서 Another 환경에 구축된 S3 (destination-s3-bucket) 로의 DataSync 작업 필요
 
 
 
@@ -191,7 +191,7 @@
     }
     ~~~
 
-    ​
+    
 
 
 
@@ -304,7 +304,7 @@ def lambda_handler(event, context):
     # 1. Trigger 되는 날짜 하루 전 날짜를 추출
     before_one_day = datetime.today() - relativedelta(days=1)
     
-    # 2. socar-fms-iot-data/topics/* Object 추출
+    # 2. source-s3-bucket/topics/* Object 추출
     date_format = "year="+before_one_day.strftime("%Y")+"/month="+before_one_day.strftime("%m")+"/day="+before_one_day.strftime("%d")+"/*"
     
     s3_client = boto3.client("s3")
